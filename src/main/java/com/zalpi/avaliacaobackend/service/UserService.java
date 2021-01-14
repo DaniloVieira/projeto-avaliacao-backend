@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.zalpi.avaliacaobackend.dto.ResponseObject;
 import com.zalpi.avaliacaobackend.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService {
+public interface UserService extends UserDetailsService  {
 
 	ResponseObject<User> saveUser(User user);
 

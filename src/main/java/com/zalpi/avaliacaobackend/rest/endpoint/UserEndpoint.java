@@ -53,7 +53,11 @@ public class UserEndpoint {
 
 	@GetMapping("hello")
 	public ResponseEntity<ResponseObject>hello (){
-		return createResponse(ServiceUtils.createResponse("authorised", SUCCESS_MESSAGE, null));
+		return createResponse(ServiceUtils.createResponse("You have the authorization", SUCCESS_MESSAGE, null));
+	}
+	@GetMapping("hello-unauthorized")
+	public ResponseEntity<ResponseObject>helloAuthorized (){
+		return createResponse(ServiceUtils.createResponse("You don't need authorization", SUCCESS_MESSAGE, null));
 	}
 
 }

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -56,10 +57,9 @@ public class User {
 	@Column(name = "dt_creation")
 	private LocalDateTime dtcreation;
 
-
-
-//	public List<String> getRolesList (){
-//		return Stream.of(roles.split(",", -1)).collect(Collectors.toList());
-//	}
+	@JsonIgnore
+	public List<String> getRolesList (){
+		return Stream.of(roles.split(",", -1)).collect(Collectors.toList());
+	}
 
 }
