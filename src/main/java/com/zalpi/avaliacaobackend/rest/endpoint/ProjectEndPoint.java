@@ -26,6 +26,7 @@ public class ProjectEndPoint {
 
 	@GetMapping("list")
 	public ResponseEntity<ResponseObject> listByFilters(@RequestBody ProjectFilterDTO filter){
-		return createResponse(projectService.listByFilters(filter));
+		//return createResponse(projectService.listByFilters(filter));
+		return createResponse(projectService.listDTOByFilters(filter));
 	}
 }
