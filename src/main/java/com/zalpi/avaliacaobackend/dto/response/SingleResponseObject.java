@@ -1,4 +1,4 @@
-package com.zalpi.avaliacaobackend.dto;
+package com.zalpi.avaliacaobackend.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

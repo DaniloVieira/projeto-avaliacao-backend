@@ -5,9 +5,9 @@ import java.util.Objects;
 
 import com.zalpi.avaliacaobackend.constant.ResponseHttpType;
 import com.zalpi.avaliacaobackend.constant.ResponseMessage;
-import com.zalpi.avaliacaobackend.dto.PagedResponseObject;
-import com.zalpi.avaliacaobackend.dto.ResponseObject;
-import com.zalpi.avaliacaobackend.dto.SingleResponseObject;
+import com.zalpi.avaliacaobackend.dto.response.PagedResponseObject;
+import com.zalpi.avaliacaobackend.dto.response.ResponseObject;
+import com.zalpi.avaliacaobackend.dto.response.SingleResponseObject;
 
 public class ServiceUtils {
 

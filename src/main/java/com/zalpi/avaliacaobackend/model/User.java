@@ -1,15 +1,17 @@
 package com.zalpi.avaliacaobackend.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -30,6 +32,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
+@Table(name = "user")
 public class User {
 
 	@Id
@@ -56,6 +59,10 @@ public class User {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_creation")
 	private LocalDateTime dtcreation;
+
+	@ManyToMany(mappedBy = "contributors")
+	@JsonIgnore
+	private Set<Project> projects = new HashSet<>();
 
 	@JsonIgnore
 	public List<String> getRolesList (){
