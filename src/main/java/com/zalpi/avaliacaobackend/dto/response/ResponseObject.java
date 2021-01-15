@@ -1,4 +1,4 @@
-package com.zalpi.avaliacaobackend.dto;
+package com.zalpi.avaliacaobackend.dto.response;
 
 import java.time.LocalDateTime;
 

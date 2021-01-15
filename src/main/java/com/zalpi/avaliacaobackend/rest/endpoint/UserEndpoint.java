@@ -2,7 +2,7 @@ package com.zalpi.avaliacaobackend.rest.endpoint;
 
 import java.time.LocalDateTime;
 
-import com.zalpi.avaliacaobackend.dto.ResponseObject;
+import com.zalpi.avaliacaobackend.dto.response.ResponseObject;
 import com.zalpi.avaliacaobackend.model.User;
 import com.zalpi.avaliacaobackend.service.UserService;
 import com.zalpi.avaliacaobackend.util.misc.ServiceUtils;
@@ -41,7 +41,7 @@ public class UserEndpoint {
 
 	}
 
-	@PostMapping("save")
+	@PostMapping("sign-up")
 	public ResponseEntity<ResponseObject>save (@RequestBody User user){
 		return createResponse(userService.saveUser(user));
 	}
@@ -55,6 +55,7 @@ public class UserEndpoint {
 	public ResponseEntity<ResponseObject>hello (){
 		return createResponse(ServiceUtils.createResponse("You have the authorization", SUCCESS_MESSAGE, null));
 	}
+
 	@GetMapping("hello-unauthorized")
 	public ResponseEntity<ResponseObject>helloAuthorized (){
 		return createResponse(ServiceUtils.createResponse("You don't need authorization", SUCCESS_MESSAGE, null));

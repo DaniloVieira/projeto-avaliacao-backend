@@ -2,7 +2,7 @@ package com.zalpi.avaliacaobackend.util.misc;
 
 import java.util.Objects;
 
-import com.zalpi.avaliacaobackend.dto.ResponseObject;
+import com.zalpi.avaliacaobackend.dto.response.ResponseObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
