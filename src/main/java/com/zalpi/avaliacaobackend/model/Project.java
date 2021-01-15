@@ -69,7 +69,7 @@ public class Project {
 	@JsonIgnore
 	 private Set<User> contributors = new HashSet<>();
 
-	@OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.LAZY )
+	@OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
 	@JsonIgnore
 	private Set<Activity> activities = new HashSet<>();
 
