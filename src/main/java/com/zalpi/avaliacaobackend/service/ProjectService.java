@@ -3,7 +3,7 @@ package com.zalpi.avaliacaobackend.service;
 import java.util.List;
 
 import com.zalpi.avaliacaobackend.dto.ProjectDTO;
-import com.zalpi.avaliacaobackend.dto.response.ProjectFilterDTO;
+import com.zalpi.avaliacaobackend.dto.filter.ProjectFilterDTO;
 import com.zalpi.avaliacaobackend.dto.response.ResponseObject;
 import com.zalpi.avaliacaobackend.model.Project;
 

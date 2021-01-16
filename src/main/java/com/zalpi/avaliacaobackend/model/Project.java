@@ -21,15 +21,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
+@Getter
+@Setter
 @Entity
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+//@ToString
+//@EqualsAndHashCode
 @Table(name = "project")
 public class Project {
 
@@ -44,19 +45,19 @@ public class Project {
 	@Column(name = "nm_client")
 	private String clientName;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_creation")
 	private LocalDateTime dtCreation;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_start")
 	private LocalDateTime dtStart;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_expected_completion")
 	private LocalDateTime dtExpectedCompletion;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_real_completion")
 	private LocalDateTime dtRealCompletion;
 
@@ -66,11 +67,11 @@ public class Project {
 		joinColumns = { @JoinColumn(name = "fk_project") },
 		inverseJoinColumns = { @JoinColumn(name = "fk_user") }
 	)
-	@JsonIgnore
-	 private Set<User> contributors = new HashSet<>();
+//	@JsonIgnore
+	private Set<User> contributors = new HashSet<>();
 
 	@OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
-	@JsonIgnore
-	private Set<Activity> activities = new HashSet<>();
+//	@JsonIgnore
+	private Set<Activity> activities;
 
 }

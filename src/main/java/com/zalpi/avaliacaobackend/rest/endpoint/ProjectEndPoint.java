@@ -1,8 +1,7 @@
 package com.zalpi.avaliacaobackend.rest.endpoint;
 
-import com.zalpi.avaliacaobackend.dto.response.ProjectFilterDTO;
+import com.zalpi.avaliacaobackend.dto.filter.ProjectFilterDTO;
 import com.zalpi.avaliacaobackend.dto.response.ResponseObject;
-import com.zalpi.avaliacaobackend.model.Project;
 import com.zalpi.avaliacaobackend.service.ProjectService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

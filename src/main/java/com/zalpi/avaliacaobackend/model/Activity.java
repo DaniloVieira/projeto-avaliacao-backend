@@ -12,20 +12,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
+@Getter
+@Setter
 @Entity
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "activity")
+//@JsonIgnoreProperties(value = {"user", "project"}, allowSetters = true)
 public class Activity {
 
 	@Id
@@ -37,23 +41,24 @@ public class Activity {
 	private String description;
 
 	@Column(name = "ds_details")
-	private String datails;
+	private String details;
 
 	@Column(name = "dt_start")
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dtStart;
 
 	@Column(name = "dt_end")
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dtEnd;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_user")
-	@JsonIgnore
 	private User user;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "fk_project")
-	@JsonIgnore
 	private Project project;
 
 	//TODO if there still time, implement type of activity model
+
 }
