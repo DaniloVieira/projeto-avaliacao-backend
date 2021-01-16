@@ -1,4 +1,4 @@
-package com.zalpi.avaliacaobackend.dto.response;
+package com.zalpi.avaliacaobackend.dto.filter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,7 +27,7 @@ public class ProjectFilterDTO {
 
 	private String description;
 	private String clientName;
-	private String contributorName;
+	//private String contributorName;
 	private List<Long> contributorsIds;
 	private Integer page;
 	private Integer pageSize;

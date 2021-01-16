@@ -1,16 +1,12 @@
 package com.zalpi.avaliacaobackend.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.zalpi.avaliacaobackend.constant.ResponseHttpType;
 import com.zalpi.avaliacaobackend.dao.UserDao;
 import com.zalpi.avaliacaobackend.dto.response.ResponseObject;
-import com.zalpi.avaliacaobackend.model.Project;
 import com.zalpi.avaliacaobackend.model.User;
 import com.zalpi.avaliacaobackend.service.UserService;
 import lombok.NonNull;
@@ -19,9 +15,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import static com.zalpi.avaliacaobackend.constant.ResponseMessage.*;
+import static com.zalpi.avaliacaobackend.constant.ResponseMessage.ERROR_MESSAGE;
+import static com.zalpi.avaliacaobackend.constant.ResponseMessage.SUCCESS_MESSAGE;
 import static com.zalpi.avaliacaobackend.util.misc.ServiceUtils.createResponse;
 
 @Service
