@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.zalpi.avaliacaobackend.dao.query.ProjectDaoQuery;
-import com.zalpi.avaliacaobackend.dto.response.ProjectFilterDTO;
+import com.zalpi.avaliacaobackend.dto.filter.ProjectFilterDTO;
 import com.zalpi.avaliacaobackend.model.Project;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +32,10 @@ public class ProjectDAOImpl implements ProjectDaoQuery {
 	private Query getCreateQuery(ProjectFilterDTO filter, String select, String lastStmt) {
 		Query query = entityManager.createQuery(
 			"SELECT " +select+ " FROM Project p JOIN p.contributors c "
-			+ "WHERE (p.description LIKE '%'||:description||'%' OR :description IS NULL) "
-			+ "AND (p.clientName LIKE '%'||:clientName||'%' OR :clientName IS NULL)"
-			+ "AND (c.firstName LIKE '%'||:contributorName||'%' OR :contributorName IS NULL)"
-			//+ "AND (c.id in :contributorsIds OR :contributorsIds is null)"
+			+ "WHERE (UPPER(p.description) LIKE UPPER('%'||:description||'%') OR :description IS NULL) "
+			+ "AND (UPPER(p.clientName) LIKE UPPER('%'||:clientName||'%') OR :clientName IS NULL)"
+			//+ "AND (UPPER(CONCAT(c.firstName, ' ', c.lastName)) LIKE UPPER('%'||:contributorName||'%') OR :contributorName IS NULL)"
+			+ "AND (c.id in :contributorsIds OR :contributorsIds is null)"
 			+ "AND (p.dtCreation >= :dtInitialCreation OR :dtInitialCreation IS NULL)"
 			+ "AND (p.dtCreation <= :dtFinalCreation OR :dtFinalCreation IS NULL)"
 			+ "AND (p.dtStart >= :dtInitialStart OR :dtInitialStart IS NULL)"
@@ -45,7 +45,8 @@ public class ProjectDAOImpl implements ProjectDaoQuery {
 			+ lastStmt);
 		query.setParameter("description", filter.getDescription());
 		query.setParameter("clientName", filter.getClientName());
-		query.setParameter("contributorName", filter.getContributorName());
+		//query.setParameter("contributorName", filter.getContributorName());
+		query.setParameter("contributorsIds", filter.getContributorsIds());
 		query.setParameter("dtInitialCreation", filter.getDtInitialRealCompletion());
 		query.setParameter("dtFinalCreation", filter.getDtFinalRealCompletion());
 		query.setParameter("dtInitialStart", filter.getDtInitialStart());
@@ -58,7 +59,7 @@ public class ProjectDAOImpl implements ProjectDaoQuery {
 	@Override
 	public Integer totalRecords(ProjectFilterDTO filter) {
 		String select = "count(p)";
-		Query query = getCreateQuery(filter, "count(p)", "GROUP BY p");
+		Query query = getCreateQuery(filter, "count(p)", "");
 		return ((Long) query.getSingleResult()).intValue();
 	}
 }

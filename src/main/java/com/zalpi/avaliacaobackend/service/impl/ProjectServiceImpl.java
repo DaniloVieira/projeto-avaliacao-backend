@@ -3,16 +3,14 @@ package com.zalpi.avaliacaobackend.service.impl;
 import java.math.BigInteger;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.zalpi.avaliacaobackend.dao.ProjectDAO;
 import com.zalpi.avaliacaobackend.dto.ProjectDTO;
-import com.zalpi.avaliacaobackend.dto.response.ProjectFilterDTO;
+import com.zalpi.avaliacaobackend.dto.filter.ProjectFilterDTO;
 import com.zalpi.avaliacaobackend.dto.response.ResponseObject;
 import com.zalpi.avaliacaobackend.model.Activity;
 import com.zalpi.avaliacaobackend.model.Project;
