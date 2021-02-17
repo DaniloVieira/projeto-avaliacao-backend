@@ -23,11 +23,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Entity
-@ToString
-@EqualsAndHashCode
+//@ToString
+//@EqualsAndHashCode
 @Table(name = "activity")
 //@JsonIgnoreProperties(value = {"user", "project"}, allowSetters = true)
 public class Activity {
@@ -61,4 +61,59 @@ public class Activity {
 
 	//TODO if there still time, implement type of activity model
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
+	public LocalDateTime getDtStart() {
+		return dtStart;
+	}
+
+	public void setDtStart(LocalDateTime dtStart) {
+		this.dtStart = dtStart;
+	}
+
+	public LocalDateTime getDtEnd() {
+		return dtEnd;
+	}
+
+	public void setDtEnd(LocalDateTime dtEnd) {
+		this.dtEnd = dtEnd;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 }

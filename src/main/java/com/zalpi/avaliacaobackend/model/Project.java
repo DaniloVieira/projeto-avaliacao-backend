@@ -26,8 +26,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Entity
 //@ToString
 //@EqualsAndHashCode
@@ -61,7 +61,12 @@ public class Project {
 	@Column(name = "dt_real_completion")
 	private LocalDateTime dtRealCompletion;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY,
+		cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+		}
+	)
 	@JoinTable(
 		name = "project_user",
 		joinColumns = { @JoinColumn(name = "fk_project") },
@@ -74,4 +79,75 @@ public class Project {
 //	@JsonIgnore
 	private Set<Activity> activities;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
+	public LocalDateTime getDtCreation() {
+		return dtCreation;
+	}
+
+	public void setDtCreation(LocalDateTime dtCreation) {
+		this.dtCreation = dtCreation;
+	}
+
+	public LocalDateTime getDtStart() {
+		return dtStart;
+	}
+
+	public void setDtStart(LocalDateTime dtStart) {
+		this.dtStart = dtStart;
+	}
+
+	public LocalDateTime getDtExpectedCompletion() {
+		return dtExpectedCompletion;
+	}
+
+	public void setDtExpectedCompletion(LocalDateTime dtExpectedCompletion) {
+		this.dtExpectedCompletion = dtExpectedCompletion;
+	}
+
+	public LocalDateTime getDtRealCompletion() {
+		return dtRealCompletion;
+	}
+
+	public void setDtRealCompletion(LocalDateTime dtRealCompletion) {
+		this.dtRealCompletion = dtRealCompletion;
+	}
+
+	public Set<User> getContributors() {
+		return contributors;
+	}
+
+	public void setContributors(Set<User> contributors) {
+		this.contributors = contributors;
+	}
+
+	public Set<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
+	}
 }

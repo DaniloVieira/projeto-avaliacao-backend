@@ -40,7 +40,7 @@ public class ActivityDAOImpl implements ActivityDaoQuery {
 			"SELECT " +select+ " FROM Activity a "
 				+ "JOIN a.user c "
 				+ "JOIN a.project p "
-				+ "WHERE (UPPER(CONCAT(a.description, ' ', a.details) LIKE UPPER('%'||:description||'%') OR :description IS NULL) "
+				+ "WHERE (UPPER(CONCAT(a.description, ' ', a.details)) LIKE UPPER('%'||:description||'%') OR :description IS NULL) "
 				+ "AND (c.id = :contributorId OR :contributorId is null) "
 				+ "AND (c.id = :projectId OR :projectId is null) "
 				+ "AND (a.dtStart >= :dtInitialStart OR :dtInitialStart IS NULL) "

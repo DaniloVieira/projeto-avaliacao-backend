@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,14 +22,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-//@Data
+//@Getter
+//@Setter
 @Entity
 //@ToString
-//@AllArgsConstructor
-//@NoArgsConstructor
 //@EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
@@ -65,6 +67,7 @@ public class User {
 	private Set<Project> projects = new HashSet<>();
 
 	@JsonIgnore
+	@Transient
 	public List<String> getRolesList (){
 		return Stream.of(roles.split(",", -1)).collect(Collectors.toList());
 	}
