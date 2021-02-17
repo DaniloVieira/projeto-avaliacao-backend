@@ -28,6 +28,7 @@ public class ProjectFilterDTO {
 	private String description;
 	private String clientName;
 	//private String contributorName;
+	private Integer projectId;
 	private List<Long> contributorsIds;
 	private Integer page;
 	private Integer pageSize;
