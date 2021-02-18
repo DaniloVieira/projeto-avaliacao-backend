@@ -72,7 +72,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	private BigInteger hoursExpent (LocalDateTime start, LocalDateTime end){
-		if(Objects.isNull(start) && Objects.isNull(end)) return BigInteger.ZERO;
+		if(Objects.isNull(start) || Objects.isNull(end)) return BigInteger.ZERO;
 		Duration duration = Duration.between(start, end);
 		return BigInteger.valueOf(duration.toHours()) ;
 	}

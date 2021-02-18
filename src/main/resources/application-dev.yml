@@ -3,18 +3,18 @@ server:
   servlet:
     context-path: /project-management-backend
 
-jpa:
-  generate-ddl: true
-  hibernate:
-    ddl-auto: create
-  show-sql: true
-  properties:
-    hibernate:
-      show-sql: true
-      format_sql: true
-
 spring:
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/PROJECT_MANAGEMENT
     username: root
     password: password
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_CREATE:none}
+
+    show-sql: true
+#    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
+
