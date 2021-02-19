@@ -33,7 +33,7 @@ public class ProjectDAOImpl implements ProjectDaoQuery {
 		Query query = entityManager.createQuery(
 			"SELECT " +select+ " FROM Project p JOIN p.contributors c "
 			+ "WHERE (UPPER(p.description) LIKE UPPER('%'||:description||'%') OR :description IS NULL) "
-			+ "AND (UPPER(p.clientName) LIKE UPPER('%'||:clientName||'%') OR :clientName IS NULL)"
+			+ "AND (UPPER(p.clientName) LIKE UPPER('%'||:clientName||'%') OR :clientName IS NULL) "
 			//+ "AND (UPPER(CONCAT(c.firstName, ' ', c.lastName)) LIKE UPPER('%'||:contributorName||'%') OR :contributorName IS NULL)"
 			+ "AND (c.id in :contributorsIds OR :contributorsIds is null)"
 			+ "AND (p.dtCreation >= :dtInitialCreation OR :dtInitialCreation IS NULL)"
