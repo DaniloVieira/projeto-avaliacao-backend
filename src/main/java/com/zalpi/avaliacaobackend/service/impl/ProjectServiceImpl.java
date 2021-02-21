@@ -4,9 +4,11 @@ import java.math.BigInteger;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.zalpi.avaliacaobackend.dao.ProjectDAO;
 import com.zalpi.avaliacaobackend.dto.ProjectDTO;
@@ -53,6 +55,23 @@ public class ProjectServiceImpl implements ProjectService {
 			e.printStackTrace();
 			return createResponse(null, ERROR_MESSAGE, e);
 		}
+	}
+
+	private Map map (Project p){
+		Map<String, String> map = Stream.of(new String[][] {
+			{ "value", p.getId()+"" },
+			{ "label", p.getDescription()+"" },
+		}).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+		return map;
+	}
+
+	@Override
+	public Set listDomain(Long contributorId) {
+		Set result = (Set) projectDAO.listByContributorId(contributorId)
+			.stream()
+			.map(p -> map((Project) p))
+			.collect(Collectors.toSet());
+		return result;
 	}
 
 	private Set<ProjectDTO> createResultSet(List<Project> resultList){
