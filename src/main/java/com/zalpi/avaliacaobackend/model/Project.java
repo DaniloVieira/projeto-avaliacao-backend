@@ -34,6 +34,14 @@ import lombok.ToString;
 @Table(name = "project")
 public class Project {
 
+	public Project() {
+	}
+
+	public Project(Long id, String description) {
+		this.id = id;
+		this.description = description;
+	}
+
 	@Id
 	@Column(name = "id_project")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
