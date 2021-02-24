@@ -65,6 +65,7 @@ public class DataLoader implements ApplicationRunner {
 		project.setClientName(clientName);
 		project.getContributors().addAll(Set.of(users));
 		project.setDtCreation(LocalDateTime.now());
+		project.setDtExpectedCompletion(LocalDateTime.now().plusMonths(6));
 		return project;
 	}
 

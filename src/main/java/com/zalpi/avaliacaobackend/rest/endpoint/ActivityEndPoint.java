@@ -10,7 +10,9 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import static com.zalpi.avaliacaobackend.util.misc.ResponseUtil.createResponse;
 
 @RestController
 @ResponseBody
-@RequestMapping(value = "/activities/", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/activity/", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class ActivityEndPoint {
 
@@ -31,6 +33,16 @@ public class ActivityEndPoint {
 	@PostMapping("save")
 	public ResponseEntity<ResponseObject> saveActivity(@RequestBody ActivityDTO activity) {
 		return createResponse(activityService.saveActivity(activity));
+	}
+
+	@GetMapping("{id}")
+	public ResponseEntity<ResponseObject> getActivityById(@PathVariable Long id){
+		return createResponse(activityService.getById(id));
+	}
+
+	@DeleteMapping("{id}")
+	public ResponseEntity<ResponseObject> DeleteActivityById(@PathVariable Long id){
+		return createResponse(activityService.deleteById(id));
 	}
 
 	@GetMapping("list")

@@ -74,6 +74,16 @@ public class ProjectServiceImpl implements ProjectService {
 		return result;
 	}
 
+	@Override
+	public ResponseObject<Project> getById(Long id) {
+		try {
+			return createResponse(projectDAO.findById(id).get(), SUCCESS_MESSAGE, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return createResponse(null, ERROR_MESSAGE, e);
+		}
+	}
+
 	private Set<ProjectDTO> createResultSet(List<Project> resultList){
 		return resultList.stream()
 			.map(p -> this.createDTO(p))

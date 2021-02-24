@@ -10,12 +10,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import static com.zalpi.avaliacaobackend.constant.ResponseMessage.*;
 import static com.zalpi.avaliacaobackend.util.misc.ResponseUtil.createResponse;
 
@@ -49,6 +45,11 @@ public class UserEndpoint {
 	@GetMapping("list-all")
 	public ResponseEntity<ResponseObject> listAll (){
 		return createResponse(userService.listAll());
+	}
+
+	@GetMapping("{id}")
+	public ResponseEntity<ResponseObject> getById (@PathVariable Long id) {
+		return createResponse(userService.getUserById(id));
 	}
 
 	@GetMapping("hello")

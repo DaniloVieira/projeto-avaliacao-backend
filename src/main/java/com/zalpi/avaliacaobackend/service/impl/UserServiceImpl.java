@@ -55,6 +55,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public ResponseObject<User> getUserById(Long id) {
+		try {
+			return createResponse(userDao.findById(id), SUCCESS_MESSAGE, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return createResponse(null, ERROR_MESSAGE, e);
+		}
+	}
+
+	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		User user = userDao.findByUsername(userName);
 		//TODO implemento i18n

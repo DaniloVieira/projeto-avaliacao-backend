@@ -12,4 +12,6 @@ public interface UserService extends UserDetailsService  {
 	ResponseObject<User> saveUser(User user);
 
 	ResponseObject<List<User>> listAll();
+
+	ResponseObject<User> getUserById(Long id);
 }
