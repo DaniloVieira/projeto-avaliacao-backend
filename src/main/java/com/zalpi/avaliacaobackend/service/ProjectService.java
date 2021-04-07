@@ -15,4 +15,6 @@ public interface ProjectService {
 	ResponseObject<List<ProjectDTO>> listDTOByFilters(ProjectFilterDTO filter);
 
 	Set listDomain(Long contributorId);
+
+	ResponseObject<Project> getById(Long id);
 }

@@ -17,4 +17,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  security:
+    filter:
+      order: 10
 

@@ -1,15 +1,14 @@
 package com.zalpi.avaliacaobackend.service.impl;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.zalpi.avaliacaobackend.constant.ResponseHttpType;
 import com.zalpi.avaliacaobackend.dao.ActivityDAO;
 import com.zalpi.avaliacaobackend.dao.ProjectDAO;
 import com.zalpi.avaliacaobackend.dao.UserDao;
 import com.zalpi.avaliacaobackend.dto.ActivityDTO;
-import com.zalpi.avaliacaobackend.dto.ProjectDTO;
 import com.zalpi.avaliacaobackend.dto.filter.ActivityFilterDTO;
 import com.zalpi.avaliacaobackend.dto.response.ResponseObject;
 import com.zalpi.avaliacaobackend.model.Activity;
@@ -52,18 +51,6 @@ public class ActivityServiceImpl implements ActivityService {
 			.collect(Collectors.toSet());
 	}
 
-	private ActivityDTO createDTO(Activity activity){
-		return ActivityDTO.builder()
-			.id(activity.getId())
-			.details(activity.getDetails())
-			.description(activity.getDescription())
-			.dtStart(activity.getDtStart())
-			.dtEnd(activity.getDtEnd())
-			.projectId(activity.getUser().getId())
-			.userId(activity.getUser().getId())
-			.build();
-	}
-
 	@Override
 	public ResponseObject<Activity> saveActivity(ActivityDTO activityDTO) {
 		Activity activity = createActivity(activityDTO);
@@ -74,6 +61,39 @@ public class ActivityServiceImpl implements ActivityService {
 			e.printStackTrace();
 			return createResponse(null, ERROR_MESSAGE, e);
 		}
+	}
+
+	@Override
+	public ResponseObject<ActivityDTO> getById(Long id) {
+		//TODO make a validation on dates and creat an exception for it
+		try{
+			return createResponse(createDTO(activityDAO.findById(id).get()), SUCCESS_MESSAGE, null);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return createResponse(null, ERROR_MESSAGE, e);
+		}
+	}
+
+	@Override public ResponseObject deleteById(Long id) {
+		try{
+			activityDAO.deleteById(id);
+			return createResponse(null, SUCCESS_MESSAGE, null);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return createResponse(null, ERROR_MESSAGE, e, ResponseHttpType.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	private ActivityDTO createDTO(Activity activity){
+		return ActivityDTO.builder()
+			.id(activity.getId())
+			.details(activity.getDetails())
+			.description(activity.getDescription())
+			.dtStart(activity.getDtStart())
+			.dtEnd(activity.getDtEnd())
+			.projectId(activity.getProject().getId())
+			.userId(activity.getUser().getId())
+			.build();
 	}
 
 	private Activity createActivity(ActivityDTO dto) {
@@ -90,13 +110,14 @@ public class ActivityServiceImpl implements ActivityService {
 
 	//TODO throw exception if project doesn't exist
 	private Project getProject(ActivityDTO dto) {
-		return projectDAO.getOne(dto.getProjectId());
+		return projectDAO.findById(dto.getProjectId()).get();
+//		return projectDAO.getOne(dto.getProjectId());
 	}
 
 	//TODO throw exception user doesn't exist
 	private User getUser(ActivityDTO dto) {
-//		return userDao.findById(dto.getUserId()).get();
-		return userDao.getOne(dto.getUserId());
+		return userDao.findById(dto.getUserId()).get();
+//		return userDao.getOne(dto.getUserId());
 	}
 
 }

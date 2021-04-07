@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ import static com.zalpi.avaliacaobackend.util.misc.ServiceUtils.createResponse;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@NonNull
 	private UserDao userDao;
@@ -55,6 +56,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public ResponseObject<User> getUserById(Long id) {
+		try {
+			return createResponse(userDao.findById(id), SUCCESS_MESSAGE, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return createResponse(null, ERROR_MESSAGE, e);
+		}
+	}
+
+	@Override
+	public User findByUsernanme(String username) {
+		return userDao.findByUsername(username);
+	}
+
+	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		User user = userDao.findByUsername(userName);
 		//TODO implemento i18n
@@ -64,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
 	private UserDetails createUserDetails(User user, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked) {
 		return new org.springframework.security.core.userdetails.User(
-			user.getUserName(),
+			user.getUsername(),
 			user.getPassword(),
 			enabled,
 			accountNonExpired,

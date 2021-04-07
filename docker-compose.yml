@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mysqlsrv:
+    image: mysql:8.0.22
+    container_name: mysql-main
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "PROJECT_MANAGEMENT"
+    ports:
+      - "3306:3306"
+    volumes:
+      #- /home/renatogroffe/Desenvolvimento/Docker/Volumes/MySql:/var/lib/mysql
+      - /home/supero/docker-datadir/mysql:/var/lib/mysql
+    networks:
+      - mysql-compose-network
+
+  adminer:
+    image: adminer
+    ports:
+      - 8070:8080
+    networks:
+      - mysql-compose-network
+
+networks:
+  mysql-compose-network:
+    driver: bridge

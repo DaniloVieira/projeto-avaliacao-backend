@@ -19,13 +19,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 //@Getter
 //@Setter
@@ -53,7 +46,7 @@ public class User {
 	private String password;
 
 	@Column(name = "ds_username", unique = true)
-	private String userName;
+	private String username;
 
 	@Column(name = "ds_roles")
 	private String roles;
@@ -66,7 +59,9 @@ public class User {
 	@JsonIgnore
 	private Set<Project> projects = new HashSet<>();
 
-	@JsonIgnore
+	@Transient
+	private String token;
+
 	@Transient
 	public List<String> getRolesList (){
 		return Stream.of(roles.split(",", -1)).collect(Collectors.toList());
@@ -104,12 +99,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 	public String getRoles() {
@@ -134,5 +129,13 @@ public class User {
 
 	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

@@ -1,5 +1,6 @@
 package com.zalpi.avaliacaobackend.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,7 +33,7 @@ import lombok.ToString;
 //@ToString
 //@EqualsAndHashCode
 @Table(name = "project")
-public class Project {
+public class Project implements Serializable {
 
 	public Project() {
 	}
@@ -53,19 +54,19 @@ public class Project {
 	@Column(name = "nm_client")
 	private String clientName;
 
-//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_creation")
 	private LocalDateTime dtCreation;
 
-//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_start")
 	private LocalDateTime dtStart;
 
-//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_expected_completion")
 	private LocalDateTime dtExpectedCompletion;
 
-//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dt_real_completion")
 	private LocalDateTime dtRealCompletion;
 
@@ -80,11 +81,11 @@ public class Project {
 		joinColumns = { @JoinColumn(name = "fk_project") },
 		inverseJoinColumns = { @JoinColumn(name = "fk_user") }
 	)
-//	@JsonIgnore
+	@JsonIgnore
 	private Set<User> contributors = new HashSet<>();
 
 	@OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
-//	@JsonIgnore
+	@JsonIgnore
 	private Set<Activity> activities;
 
 	public Long getId() {

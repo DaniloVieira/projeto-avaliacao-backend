@@ -29,8 +29,12 @@ public class ProjectEndPoint {
 
 	@GetMapping("list")
 	public ResponseEntity<ResponseObject> listByFilters(@RequestBody ProjectFilterDTO filter){
-		//return createResponse(projectService.listByFilters(filter));
 		return createResponse(projectService.listDTOByFilters(filter));
+	}
+
+	@GetMapping("{id}")
+	public ResponseEntity<ResponseObject> getProjectById(@PathVariable Long id){
+		return createResponse(projectService.getById(id));
 	}
 
 	@GetMapping("domain/{contributorId}")

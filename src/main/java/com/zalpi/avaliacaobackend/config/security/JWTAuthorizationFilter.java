@@ -1,4 +1,4 @@
-package com.zalpi.avaliacaobackend.config;
+package com.zalpi.avaliacaobackend.config.security;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+@Deprecated
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
 
